@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% block head_title %}MY Shop{% endblock %}
+
+
+{% block content %}
+<h1>Thank you</h1>
+payment recieved you will be notify by email and invoice is also send to your email
+{% endblock %}
+
+{% block extrajs %}
+{% endblock %}
+
+

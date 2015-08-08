@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block head_title %}{{flatpage.title}} | MY Shop{% endblock %}
+{% block content %}
+    <h3>{{ flatpage.title }}</h3>
+    <div>
+        <p>{{ flatpage.content }}<p>
+    </div>
+{% endblock %}

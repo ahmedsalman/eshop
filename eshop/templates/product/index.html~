@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block head_title %}MY Shop{% endblock %}
+{% block carousel %}
+    {% include "product/includes/carousel.html" %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="row">
+        {% for item in products %}
+            <div class="col-sm-4 col-lg-4 col-md-4">
+                <div class="thumbnail">
+                    <a href="{% url 'product_page' item.category.slug item.slug %}" data-toggle="tooltip" data-placement="top" title="{{item.title}}">
+                    {% if item.image %}
+                        <img src="{% thumbnail item.image 320x150 crop %}" data-toggle="tooltip" data-placement="top" title="{{item.title}}">
+                    {% else %}
+                        <img src="http://placehold.it/320x150" alt="">
+                    {% endif %}
+                    </a>
+                    <div class="caption">
+                        <h4 class="pull-right">${{item.price}}</h4>
+                        <h4><a href="{% url 'product_page' item.category.slug item.slug %}" data-toggle="tooltip" data-placement="top" title="{{item.title}}">{{item.title|truncatechars:18}}</a></h4>
+                        <p>{{item.description}}</p>
+                    </div>
+                    <div class="ratings">
+                        <p class="pull-right">15 reviews</p>
+                        <p>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+{% block extrajs %}
+{% endblock %}
+

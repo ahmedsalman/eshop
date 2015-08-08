@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load review_tags %}
+{% load i18n %}
+{% load staticfiles %}
+{% load thumbnail %}
+{% block head_title %}MY Shop{% endblock %}
+
+
+{% block content %}
+    <div class="thumbnail">
+        <img class="img-responsive" src="{% thumbnail product.image 800x300 crop %}" data-toggle="tooltip" data-placement="top" title="{{product.title}}">
+        <div class="caption-full">
+            <h4 class="pull-right">${{product.price}}</h4>
+            <h4><a href="{% url 'product_page' product.category.slug product.slug %}">{{product.title}}</a></h4>
+            <p><a href="{% url 'checkout' %}?&amount={{product.price}}&name={{product.slug}}" class="btn btn-warning">Buy</a></p>
+            <p>{{product.description}}</p>
+            <span class="span3"><strong>Brand:</strong> {{product.brand}}</span><div class="clear-fix"></div>
+            <span class="span3"><strong>Manufacturer:</strong> {{product.manufacturer}}</span><div class="clear-fix"></div>
+            <span class="span3"><strong>Publisher:</strong> {{product.publisher}}</span><div class="clear-fix"></div>
+        </div>
+    </div>
+
+    <div class="well">
+        <div class="row"><a id="reviewshow">{% trans "Review this product" %}</a>
+            {% get_review_count product as review_count %}
+            <p class="ratings pull-right">{{ review_count }} reviews</p>
+        </div>
+        <div class="row">
+            <form id="reviewform" method="post" action="{% url "review_create" content_type='product' object_id=product.pk %}?next={{request.path}}" class="span12 hidden">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea class="form-control" placeholder="Review" maxlength="1024" name="content"></textarea>
+                    <input type="hidden" name="next" value="{{request.path}}" />
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+
+
+    {% get_reviews product as reviews %}
+    {% for review in reviews %}
+        <div class="row">
+            <div class="col-md-12">
+                <span class="pull-left"><strong>Posted By:</strong> {{review.user.username}}</span>
+
+                <span class="pull-right"><strong>Posted On:</strong> {{review.creation_date}}</span><div class="clearfix"></div>
+                <p>
+                    {% if review.content %}
+                        {{ review.content }}
+                    {% else %}
+                        Reviewed without description.
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
+{% endblock %}
+
+{% block extrajs %}
+<script>
+$( "#reviewshow" ).click(function() {
+  $( "#reviewform" ).toggleClass( "hidden" );
+});
+</script>
+{% endblock %}
+
