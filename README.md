@@ -7,8 +7,9 @@ pip install -r requirement.txt
 pip uninstall south
 
 open settings.py
-    PAYPAL_IDENTITY_TOKEN = "enter your token"
-    PAYPAL_RECEIVER_EMAIL = "your paypal business email"
+
+    PAYPAL_IDENTITY_TOKEN = "enter your token"                          #you may change these value as per your system settings
+    PAYPAL_RECEIVER_EMAIL = "your paypal business email"                #you may change these value as per your system settings
 
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'       #you may change these value as per your system settings
     EMAIL_USE_TLS = True                                                #you may change these value as per your system settings
@@ -18,6 +19,7 @@ open settings.py
     EMAIL_HOST_PASSWORD = 'password'
 
 if you are using the test database which is included in the package then no need to run migrate or syncdb
+
     python manage.py migrate
     python manage.py syncdb
 
