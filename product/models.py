@@ -1,10 +1,6 @@
 from django.db import models
 from product.utils import unique_slugify
 
-# Watches
-# Shoes
-# Jewelry
-# perfume
 
 class CategoryBanner(models.Model):
     image = models.ImageField(upload_to='carousel/')

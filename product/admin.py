@@ -3,6 +3,7 @@ from django.utils.text import slugify
 
 from models import Category, Product, CategoryBanner
 
+
 class CategoryAdmin(admin.ModelAdmin):
 
     list_display = ['id', 'title', 'created', 'modified', 'visible', ]
@@ -15,8 +16,8 @@ class CategoryAdmin(admin.ModelAdmin):
     save_on_top = True
     readonly_fields = ['id', 'created', 'modified']
     fieldsets = [
-            (None, {'fields': ['id', 'title', 'banners', 'visible']})
-        ]
+        (None, {'fields': ['id', 'title', 'banners', 'visible']})
+    ]
 
     def queryset(self, request):
         qs = Category.objects.all()
@@ -38,9 +39,9 @@ class ProductAdmin(admin.ModelAdmin):
 
     fieldsets = [
         (None, {'fields': ['id', 'title', 'description', 'price', 'visible']}),
-        ('Additional Information', {'fields': ['category', 'publisher', 'manufacturer', 'brand',
-                                               'image']}),
-        ]
+        ('Additional Information', {'fields': ['category', 'publisher',
+        'manufacturer', 'brand', 'image']}),
+    ]
 
     def queryset(self, request):
         qs = Product.objects.all()
