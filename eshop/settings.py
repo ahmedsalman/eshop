@@ -91,6 +91,7 @@ ROOT_URLCONF = 'eshop.urls'
 
 WSGI_APPLICATION = 'eshop.wsgi.application'
 
+
 def REVIEW_UPDATE_SUCCESS_URL(review):
     return review.reviewed_item.get_absolute_url()
 

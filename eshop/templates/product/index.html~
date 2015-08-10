@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load review_tags %}
 {% load thumbnail %}
 {% block head_title %}MY Shop{% endblock %}
 {% block carousel %}
@@ -25,14 +26,8 @@
                         <p>{{item.description}}</p>
                     </div>
                     <div class="ratings">
-                        <p class="pull-right">15 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                        </p>
+                        {% get_review_count item as review_count %}
+                        <p class="pull-right">{{ review_count }} reviews</p>
                     </div>
                 </div>
             </div>

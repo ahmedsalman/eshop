@@ -12,7 +12,7 @@
         <div class="caption-full">
             <h4 class="pull-right">${{product.price}}</h4>
             <h4><a href="{% url 'product_page' product.category.slug product.slug %}">{{product.title}}</a></h4>
-            <p><a href="{% url 'checkout' %}?&amount={{product.price}}&name={{product.slug}}" class="btn btn-warning">Buy</a></p>
+            <p><a href="{% url 'checkout' %}?&name={{product.slug}}" class="btn btn-warning">Buy</a></p>
             <p>{{product.description}}</p>
             <span class="span3"><strong>Brand:</strong> {{product.brand}}</span><div class="clear-fix"></div>
             <span class="span3"><strong>Manufacturer:</strong> {{product.manufacturer}}</span><div class="clear-fix"></div>

@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
+from django.http import HttpResponseRedirect
 from django.shortcuts import (render_to_response,
 get_object_or_404, redirect, render)
 from django.template import RequestContext
@@ -83,10 +84,17 @@ def checkout(request):
     domain = request.META['HTTP_HOST']
     protocol = 'https://' if request.is_secure() else 'http://'
 
+    slug = request.GET.get('name')
+    try:
+        product = Product.objects.get(
+            slug=slug, visible=True)
+    except Product.DoesNotExist:
+        return HttpResponseRedirect(reverse('home'))
+
     # What you want the button to do.
     paypal_dict = {
         "business": settings.PAYPAL_RECEIVER_EMAIL,
-        "amount": request.GET.get('amount'),
+        "amount": product.price,
         "item_name": request.GET.get('name'),
         "invoice": uuid.uuid4(),
         "notify_url": protocol + domain + reverse('paypal-pdt'),
